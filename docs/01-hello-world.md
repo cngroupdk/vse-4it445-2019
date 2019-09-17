@@ -25,6 +25,8 @@ You can use any editor you like, but:
 - [language-babel](https://atom.io/packages/language-babel)
 - [prettier-atom](https://atom.io/packages/prettier-atom)
 
+Go to `Packages` > `Prettier` > `Toggle Format on Save`.
+
 **After the installation of all packages please quit and start the Atom again.**
 
 ### Setup Project Folder
@@ -38,14 +40,14 @@ Go to `File` > `Add Project Folder...`, create new empty folder and select it.
 Go to `Packages` > `Remote-FTP` > `Create SFTP config file`.
 
 This will open new `.ftpconfig` file with JSON configuration.
-Replace it with JSON example bellow, and **change `USERNAME` in `"use"` and `"remote"` with your SSH username**:
+Replace it with JSON example bellow, and **change both `USERNAME`s in `"user"` and `"remote"` to your SSH username**:
 
 ```json
 {
   "user": "USERNAME",
   "remote": "/home/USERNAME/code/cviceni/",
-
   "promptForPass": true,
+
   "protocol": "sftp",
   "host": "vse.handson.pro",
   "port": 22,
@@ -63,7 +65,14 @@ Replace it with JSON example bellow, and **change `USERNAME` in `"use"` and `"re
 }
 ```
 
-You can add `"pass": "pass",` with your SSH password, but it's not very secure.
+You can change to this:
+
+```
+  "promptForPass": false,
+  "pass": "PASS",
+```
+
+and change `PASS` to your SSH password (but it's not very secure!).
 
 **Save the `.ftpconfig` file.**
 
@@ -72,6 +81,19 @@ You can add `"pass": "pass",` with your SSH password, but it's not very secure.
 Go to `Packeges` > `Remote-FTP` > `Connect`. You will be asked about password to you server account (you have received it in an email).
 
 Now you should see second tree view with files on server.
+
+## SSH to Server
+
+Open [PuTTY](https://www.putty.org/) (or any other SSH client) and connect to server.
+`host`, `username`, and `password` is in your email inbox (port is 22).
+
+```sh
+cd code/cviceni/frontend
+yarn install
+touch tmp/restart.txt
+```
+
+Then open `http://dev.frontend.USERNAME.vse.handson.pro/` (replace `USERNAME` with your SSH usrname).
 
 ## Run Frontend on Your Local Machine
 
