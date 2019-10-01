@@ -21,7 +21,7 @@ cd code/cviceni/frontend/
 git add .
 git stash
 git fetch --all
-git checkout -b practical-03
+git checkout practical-03
 
 yarn install
 touch tmp/restart.txt
