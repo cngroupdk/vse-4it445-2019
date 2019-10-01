@@ -115,15 +115,15 @@ touch tmp/restart.txt
 
   ```css
   .button {
-    color: 'white';
+    color: white;
   }
 
   .primaryVariant {
-    background-color: 'blue';
+    background-color: blue;
   }
 
   .dangerVariant {
-    background-color: 'red';
+    background-color: red;
   }
   ```
 
