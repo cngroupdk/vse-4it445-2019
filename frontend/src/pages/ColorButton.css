@@ -1,0 +1,11 @@
+.button {
+  color: white;
+}
+
+.primaryVariant {
+  background-color: blue;
+}
+
+.dangerVariant {
+  background-color: red;
+}

@@ -1,8 +1,31 @@
 import React, { useState } from 'react';
+import classNames from 'classnames';
 
 import { Heading, MainSection } from '../atoms/';
 import { TopNavigation } from '../organisms/TopNavigation';
 import { formatDate } from '../utils/date';
+import { getMockQuacks, getMockUser } from '../utils/mocks.js';
+
+import './ColorButton.css';
+
+console.log('all mocks', getMockQuacks());
+console.log('mock user', getMockUser('johndoe'));
+
+const oldArray = [1, 2, 3, 4];
+
+function ColorButton({ variant = 'primary', children, ...rest }) {
+  return (
+    <button
+      className={classNames('button', {
+        primaryVariant: variant === 'primary',
+        dangerVariant: variant === 'danger',
+      })}
+      {...rest}
+    >
+      {children}
+    </button>
+  );
+}
 
 function SimpleQuack({ quack }) {
   const { user, text, createdAt, likes = 0 } = quack;
@@ -22,27 +45,25 @@ function SimpleQuack({ quack }) {
 }
 
 export function ExampleOnePage() {
-  const allQuacks = [
-    {},
-    { text: 'Hello, World!', likes: 2 },
-    {
-      createdAt: '2019-08-03T09:09:34.023Z',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      likes: 10,
-      user: {
-        id: 1,
-        name: 'Young Gatchell',
-        screenName: 'yg123',
-        profileImageUrl: 'http://mrmrs.github.io/photos/p/1.jpg',
-      },
-    },
-  ];
+  const allQuacks = getMockQuacks();
+
+  const [items, setItems] = useState([1, 2, 3]);
 
   return (
     <div>
       <TopNavigation />
       <MainSection>
         <Heading>Example One</Heading>
+        <code>{JSON.stringify(items)}</code>
+        <ColorButton onClick={() => setItems([...items, 5])}>
+          Button One
+        </ColorButton>
+        <ColorButton
+          variant="danger"
+          onClick={() => setItems(items.filter(item => item !== 5))}
+        >
+          Button Two
+        </ColorButton>
         <div>
           {allQuacks.map((quack, index) => (
             <SimpleQuack quack={quack} key={index} />
