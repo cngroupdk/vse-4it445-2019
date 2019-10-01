@@ -95,7 +95,7 @@ touch tmp/restart.txt
 
 Then open `http://dev.frontend.USERNAME.vse.handson.pro/` (replace `USERNAME` with your SSH usrname).
 
-## Run Frontend on Your Local Machine
+## 💻🏃 Run Frontend on Your Local Machine
 
 ### Requirements
 
@@ -110,4 +110,33 @@ Then open `http://dev.frontend.USERNAME.vse.handson.pro/` (replace `USERNAME` wi
 
 ### Clone Git Repo
 
-Open Terminal or Command line and type: `git clone https://github.com/cngroupdk/vse-4it445.git`
+Open Terminal or Command line and type:
+
+```sh
+git clone https://github.com/cngroupdk/vse-4it445.git
+```
+
+### Install Dependencies
+
+**Globla Dependencies**
+
+```sh
+npm install --global yarn
+```
+
+**Project Dependencies**
+
+```sh
+cd vse-4it445/frontend
+yarn install
+```
+
+### Run Local Dev Server
+
+```sh
+cd vse-4it445/frontend
+yarn start
+```
+
+Open [localhost:3000](http://localhost:3000).
+
