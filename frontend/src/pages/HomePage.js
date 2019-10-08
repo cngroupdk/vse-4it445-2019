@@ -12,6 +12,8 @@ export function HomePage() {
     params: { limit: 20 },
   });
 
+  console.log('quacksState', quacksState);
+
   const onLikePress = quack => {
     console.log('like:', quack);
   };
