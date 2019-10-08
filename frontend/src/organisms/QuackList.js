@@ -9,7 +9,7 @@ export function QuackList({ quacks, isLoading, error, onLikePress, refetch }) {
       {isLoading && !quacks && <Loading />}
       {error && (
         <ErrorBanner title={error.message}>
-          <Button color="red" onClick={refetch}>
+          <Button color="red" onClick={() => refetch()}>
             Reload
           </Button>
         </ErrorBanner>
