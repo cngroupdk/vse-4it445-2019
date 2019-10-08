@@ -31,7 +31,12 @@ export function HomePage() {
   return (
     <HomeTemplate
       quacksState={quacksState}
-      refetchQuacks={() => requestQuacks({ params: { page: 1 } })}
+      refetchQuacks={() =>
+        requestQuacks({
+          url: '/x',
+          params: { page: 1 },
+        })
+      }
       onLikePress={onLikePress}
       quackFormState={quackFormState}
       currentUser={user}
