@@ -1,42 +1,76 @@
 import React, { useState } from 'react';
+import classNames from 'classnames';
 
 import { Heading, MainSection } from '../atoms/';
 import { TopNavigation } from '../organisms/TopNavigation';
 import { formatDate } from '../utils/date';
+import { getMockQuacks, getMockUser } from '../utils/mocks';
 
-function SimpleQuack({ quack }) {
-  const { user, text, createdAt, likes = 0 } = quack;
+import styles from './ExampleOnePage.module.css';
 
-  const [counter, setCounter] = useState(likes);
+function SimpleQuack({ quack, onRemove, onLike }) {
+  const { id, user, text, createdAt, likeCount } = quack;
 
   return (
     <div className="bb b--black-10 pb2 mt2">
       {user && <h4 className="mv1">user: {user.screenName}</h4>}
       <h5 className="mv1">{createdAt ? formatDate(createdAt) : '(no date)'}</h5>
       <div>{text || '(no text)'}</div>
-      <button type="button" onClick={() => setCounter(counter + 1)}>
-        Likes: {counter}
-      </button>
+      <button
+        type="button"
+        onClick={() => onLike(id)}
+        className={classNames({
+          [styles.blackBg]: likeCount <= 4,
+          [styles.orangeBg]: likeCount > 4 && likeCount < 10,
+          [styles.redBg]: likeCount >= 10,
+        })}
+      >
+        Likes: {likeCount}
+      </button>{' '}
+      <button onClick={() => onRemove(id)}>Remove</button>
     </div>
   );
 }
 
 export function ExampleOnePage() {
-  const allQuacks = [
-    {},
-    { text: 'Hello, World!', likes: 2 },
-    {
-      createdAt: '2019-08-03T09:09:34.023Z',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      likes: 10,
-      user: {
-        id: 1,
-        name: 'Young Gatchell',
-        screenName: 'yg123',
-        profileImageUrl: 'http://mrmrs.github.io/photos/p/1.jpg',
-      },
-    },
-  ];
+  const [quackText, setQuackText] = useState('');
+  const [allQuacks, setAllQuacks] = useState(getMockQuacks());
+
+  function addQuack() {
+    if (!quackText) {
+      return;
+    }
+
+    const newQuack = {
+      id: Date.now(),
+      user: getMockUser('johndoe'),
+      text: quackText,
+      createdAt: new Date().toISOString(),
+      likeCount: 0,
+    };
+
+    setAllQuacks([newQuack, ...allQuacks]);
+    setQuackText('');
+  }
+
+  function likeQuack(quackId) {
+    const updatedQuacks = allQuacks.map(quack => {
+      if (quack.id !== quackId) {
+        return quack;
+      }
+
+      return {
+        ...quack,
+        likeCount: 1 + quack.likeCount,
+      };
+    });
+
+    setAllQuacks(updatedQuacks);
+  }
+
+  function removeQuack(quackId) {
+    setAllQuacks(allQuacks.filter(quack => quack.id !== quackId));
+  }
 
   return (
     <div>
@@ -44,8 +78,22 @@ export function ExampleOnePage() {
       <MainSection>
         <Heading>Example One</Heading>
         <div>
-          {allQuacks.map((quack, index) => (
-            <SimpleQuack quack={quack} key={index} />
+          <textarea
+            value={quackText}
+            onChange={event => setQuackText(event.target.value)}
+          />
+        </div>
+        <button type="button" disabled={!quackText} onClick={() => addQuack()}>
+          Add Quack
+        </button>
+        <div>
+          {allQuacks.map(quack => (
+            <SimpleQuack
+              key={quack.id}
+              quack={quack}
+              onLike={likeQuack}
+              onRemove={removeQuack}
+            />
           ))}
         </div>
       </MainSection>

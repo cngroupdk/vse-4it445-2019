@@ -35,7 +35,7 @@ How to help for [3rd Practical Class TODO](./03-styles-atomic-design-mocks-more-
   ```js
   <button
     className={classNames({
-      blackBg: counter < 0,
+      blackBg: counter <= 4,
       // Add more color CSS class names here and use different conditions
     })}
     type="button"
@@ -265,3 +265,7 @@ export function ExampleOnePage() {
 - Final tasks are:
   - Use `quackText` in "Add Quack" button instead of `'New quack here'`.
   - Clear `quackText` when user clicks on the "Add Quack" button using: `setQuackText('')`.
+
+---
+
+**Final version can be seen in [`practical-03-todo-solution`](https://github.com/cngroupdk/vse-4it445/blob/practical-03-todo-solution/frontend/src/pages/ExampleOnePage.js) branch.**
