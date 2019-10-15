@@ -10,7 +10,7 @@ yarn install
 yarn build:watch
 ```
 
-Now you can edit code in Atom. To stop editing press <kbd>Ctrl</kbd>+<kbd>C</kbd> and log off SSH.
+Now you can edit code in Atom. To stop editing switch back to running SSH, press <kbd>Ctrl</kbd>+<kbd>C</kbd> and log off.
 
 ### Run Locally
 
