@@ -11,4 +11,4 @@ npm-debug.log
 !/log/.gitkeep
 
 /tmp/*
-!/tmp/.gitkeep
+!/tmp/restart.txt
