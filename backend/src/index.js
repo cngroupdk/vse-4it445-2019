@@ -23,10 +23,12 @@ app.use(rootRoutes);
 // usefull for testing that connection is working as it should
 app.use('/testDb', async (req, res, next) => {
   console.log('This is test of DB');
+
   const dbConnection = req[DB_CONNECTION_KEY];
   const testQueryResult = await dbConnection.query('SELECT 1 as val');
-  console.log('Data poky', testQueryResult);
-  console.log('DB finished');
+
+  console.log('Data test result', testQueryResult);
+
   res.send(`DB test ${JSON.stringify(testQueryResult)}`);
 });
 

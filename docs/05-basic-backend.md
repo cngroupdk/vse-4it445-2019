@@ -33,7 +33,7 @@ const { PORT = 3001 } = process.env;
 const app = express();
 
 app.use('/quacks', (req, res, next) => {
-  res.send('QUACK QUAck');
+  res.send('QUACK QUACK');
 });
 
 app.use((req, res, next) => {
@@ -42,7 +42,7 @@ app.use((req, res, next) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server started poky on http://localhost:${PORT}!`);
+  console.log(`Server started on http://localhost:${PORT}!`);
 });
 ```
 
