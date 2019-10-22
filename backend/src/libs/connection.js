@@ -6,11 +6,11 @@ export const DB_CONNECTION_KEY = 'dbConnection';
 dotenv.config();
 dotenv.config({ path: '.env' });
 
-const { DB_NAME, DB_PASSWORD, DB_USER } = process.env;
+const { DB_NAME, DB_PASSWORD, DB_USER, DB_PORT } = process.env;
 
 const pool = mariadb.createPool({
   host: 'localhost',
-  port: 3306,
+  port: DB_PORT,
   user: DB_USER,
   password: DB_PASSWORD,
   database: DB_NAME,
