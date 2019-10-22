@@ -1,40 +1,42 @@
-import dotenv from 'dotenv';
+import bodyParser from 'body-parser';
 import express from 'express';
+import cors from 'cors';
 
-import { quacks } from './mocks';
+import rootRoutes from './rootRoutes';
 
-dotenv.config();
-dotenv.config({ path: '.env.local' });
+import { addDbToRequest, DB_CONNECTION_KEY } from './libs/connection';
 
 const { PORT = 3001 } = process.env;
 
 const app = express();
 
-app.use('/quack/:quackId', (req, res, next) => {
-  const { quackId } = req.params;
-  const quack = quacks.find(item => Number(item.id) === Number(quackId));
+// application wide needed middlewares
+app.use(bodyParser.json());
+app.use(cors());
 
-  if (!quack) {
-    res.status(404);
-    res.json({ error: true, msg: 'No quacks for you!' });
-    return;
-  }
-  res.json(quack);
+// adds and removes connection to DB to the reqeust object
+app.use(addDbToRequest);
+
+// whole app is hidden behind rootRoutes
+app.use(rootRoutes);
+
+// usefull for testing that connection is working as it should
+app.use('/testDb', async (req, res, next) => {
+  console.log('This is test of DB');
+  const dbConnection = req[DB_CONNECTION_KEY];
+  const testQueryResult = await dbConnection.query('SELECT 1 as val');
+  console.log('Data poky', testQueryResult);
+  console.log('DB finished');
+  res.send(`DB test ${JSON.stringify(testQueryResult)}`);
 });
 
-app.use('/quack', (req, res, next) => {
-  res.json(quacks);
-});
-
-app.use('/user', (req, res, next) => {
-  res.send(`User`);
-});
-
+// 404 - not found handling
 app.use((req, res, next) => {
   res.status(404);
   res.json({ error: '404: Not found' });
 });
 
+// launch of server
 app.listen(PORT, () => {
   console.log(`Server started on http://localhost:${PORT}!`);
 });
