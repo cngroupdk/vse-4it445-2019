@@ -19,10 +19,10 @@ export function installApiMocks(api) {
   });
 
   // SignInPage
-  mockAdapter.onPost('/api/v1/auth/signin').reply(200, {
-    token: 'mock-token',
-    user: mocks.users[0],
-  });
+  // mockAdapter.onPost('/api/auth/signin').reply(200, {
+  //   token: 'mock-token',
+  //   user: mocks.users[0],
+  // });
 
   // all other
   mockAdapter.onAny().passThrough();
