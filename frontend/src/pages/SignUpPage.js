@@ -7,7 +7,22 @@ import { SignUpTemplate } from '../templates/SignUpTemplate';
 import { useRequest } from '../hooks';
 import { useAuth } from '../utils/auth';
 
-const schema = yup.object().shape({});
+const schema = yup.object().shape({
+  email: yup
+    .string()
+    .email()
+    .required()
+    .label('Email'),
+  password: yup
+    .string()
+    .required()
+    .label('Password'),
+  passwordConfirmation: yup
+    .string()
+    .required()
+    .oneOf([yup.ref('password')], 'Both passwords must match')
+    .label('Password Confirmation'),
+});
 
 export function SignUpPage() {
   const history = useHistory();
@@ -15,9 +30,29 @@ export function SignUpPage() {
   const [signupRequestState, signupRequest] = useRequest();
 
   return (
-    <SignUpTemplate
-      isLoading={signupRequestState.isLoading}
-      error={signupRequestState.error}
-    />
+    <Formik
+      initialValues={{ email: '', password: '', passwordConfirmation: '' }}
+      validationSchema={schema}
+      onSubmit={values => {
+        const { email, password } = values;
+
+        signupRequest({
+          url: '/auth/signup',
+          method: 'POST',
+          data: { email, password },
+        }).then(({ data }) => {
+          const { token, user } = data;
+
+          auth.signin({ token, user });
+
+          history.replace('/');
+        });
+      }}
+    >
+      <SignUpTemplate
+        isLoading={signupRequestState.isLoading}
+        error={signupRequestState.error}
+      />
+    </Formik>
   );
 }
