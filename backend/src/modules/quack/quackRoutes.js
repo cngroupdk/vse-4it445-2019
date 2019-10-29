@@ -12,7 +12,8 @@ router.use('/addNew', async (req, res, next) => {
 
   const dbResponse = await dbConnection.query(
     `INSERT INTO quack (id, name, screenName, profileImageUrl) 
-  VALUES (NULL, '${name}', '${screenName}', '${profileImageUrl}');`,
+  VALUES (NULL, ?, ?, ?);`,
+    [name, screenName, profileImageUrl],
   );
 
   console.log('DB response', dbResponse);
@@ -33,7 +34,8 @@ router.use('/:quackId', async (req, res, next) => {
   }
 
   const quacksFromDb = await dbConnection.query(
-    `SELECT * FROM quack WHERE id = ${quackId}`,
+    `SELECT * FROM quack WHERE id = ?`,
+    [quackId],
   );
 
   const quack = quacksFromDb[0];
