@@ -1,11 +1,21 @@
 import React from 'react';
-import { Form } from 'formik';
+import { Form, useField } from 'formik';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFeatherAlt } from '@fortawesome/free-solid-svg-icons';
 
 import { Button, ErrorBanner, Heading, MainSection } from '../atoms/';
 import { Field } from '../molecules/';
 import { TopNavigation } from '../organisms/TopNavigation';
+
+function DummyField(props) {
+  const [field, meta] = useField(props);
+
+  return (
+    <div>
+      <input {...field} {...props} />
+    </div>
+  );
+}
 
 export function SignUpTemplate({ isLoading, error }) {
   const errorMessage = error && error.message;
@@ -15,10 +25,16 @@ export function SignUpTemplate({ isLoading, error }) {
       <TopNavigation />
       <MainSection>
         <Heading>Sign Up</Heading>
-        <form className="mt3">
+        <Form className="mt3">
           {errorMessage && <ErrorBanner title={errorMessage} className="mb3" />}
 
-          <div>Sign Up form here...</div>
+          <Field label="Email" name="email" type="text" />
+          <Field label="Passoword" name="password" type="password" />
+          <Field
+            label="Passoword Confirmation"
+            name="passwordConfirmation"
+            type="password"
+          />
 
           <Button type="submit" className="mt2 mb3">
             Sign Up
@@ -26,7 +42,7 @@ export function SignUpTemplate({ isLoading, error }) {
               <FontAwesomeIcon className="ml3" icon={faFeatherAlt} spin />
             )}
           </Button>
-        </form>
+        </Form>
       </MainSection>
     </>
   );
