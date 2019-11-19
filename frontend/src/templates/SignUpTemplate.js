@@ -12,7 +12,7 @@ function DummyField(props) {
 
   return (
     <div>
-      <input {...field} {...props} />
+      <input type="text" {...field} {...props} />
     </div>
   );
 }
@@ -29,9 +29,9 @@ export function SignUpTemplate({ isLoading, error }) {
           {errorMessage && <ErrorBanner title={errorMessage} className="mb3" />}
 
           <Field label="Email" name="email" type="text" />
-          <Field label="Passoword" name="password" type="password" />
+          <Field label="Password" name="password" type="password" />
           <Field
-            label="Passoword Confirmation"
+            label="Password Confirmation"
             name="passwordConfirmation"
             type="password"
           />
