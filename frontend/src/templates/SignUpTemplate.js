@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, useField } from 'formik';
+import { Form } from 'formik';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFeatherAlt } from '@fortawesome/free-solid-svg-icons';
 
@@ -7,15 +7,16 @@ import { Button, ErrorBanner, Heading, MainSection } from '../atoms/';
 import { Field } from '../molecules/';
 import { TopNavigation } from '../organisms/TopNavigation';
 
-function DummyField(props) {
-  const [field, meta] = useField(props);
+// import { useField } from 'formik';
+// function DummyField(props) {
+//   const [field, meta] = useField(props);
 
-  return (
-    <div>
-      <input type="text" {...field} {...props} />
-    </div>
-  );
-}
+//   return (
+//     <div>
+//       <input type="text" {...field} {...props} />
+//     </div>
+//   );
+// }
 
 export function SignUpTemplate({ isLoading, error }) {
   const errorMessage = error && error.message;

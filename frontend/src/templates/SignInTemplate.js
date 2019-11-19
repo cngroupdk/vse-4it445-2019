@@ -1,10 +1,8 @@
 import React from 'react';
-import { Form } from 'formik';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFeatherAlt } from '@fortawesome/free-solid-svg-icons';
 
 import { Button, ErrorBanner, Heading, MainSection } from '../atoms/';
-import { Field } from '../molecules/';
 import { TopNavigation } from '../organisms/TopNavigation';
 
 export function SignInTemplate({ isLoading, error }) {

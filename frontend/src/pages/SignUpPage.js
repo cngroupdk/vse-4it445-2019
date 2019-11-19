@@ -6,7 +6,7 @@ import { Formik } from 'formik';
 import { SignUpTemplate } from '../templates/SignUpTemplate';
 import { useRequest } from '../hooks';
 import { useAuth } from '../utils/auth';
-import { useApi } from '../utils/api';
+// import { useApi } from '../utils/api';
 
 const schema = yup.object().shape({
   email: yup
@@ -29,7 +29,7 @@ export function SignUpPage() {
   const history = useHistory();
   const auth = useAuth();
   const [signupRequestState, signupRequest] = useRequest();
-  const api = useApi();
+  // const api = useApi();
 
   return (
     <Formik
