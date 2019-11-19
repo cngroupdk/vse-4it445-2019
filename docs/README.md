@@ -6,4 +6,5 @@
   - [TODO Help](./03-todo-howto.md)
 - [4th Practical Class: Ajax and Hooks](./04-ajax.md)
 - [5th Practical Class: Basic Backend](./05-basic-backend.md)
+- [7th Practical Class: Backend/Frontend full CRUD, JWT auth, Formik](./07-crud-part-two.md)
 - [10th Practical Class: More Hooks and Friends, Debugging](./10-more-hooks-and-friends-debugging.md)
