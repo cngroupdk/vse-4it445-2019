@@ -3,14 +3,14 @@ import { useField } from 'formik';
 
 import { ErrorMessage, Label, TextInput } from '../atoms/';
 
-export function Field({ label, ...props }) {
+export function Field({ label, inputRef, ...props }) {
   const [field, meta] = useField(props);
 
   return (
     <div className="measure mb2">
       <Label>
         {label}
-        <TextInput className="mb1" {...field} {...props} />
+        <TextInput ref={inputRef} className="mb1" {...field} {...props} />
       </Label>
 
       {meta.touched && meta.error ? (
