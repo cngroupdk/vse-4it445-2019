@@ -52,11 +52,11 @@ export function ExampleTwoPage() {
     previousTextRef.current = text;
   }, [text]);
 
-  const removeItemMemoVersion = useMemo(() => {
-    return item => {
-      setItems(oldItems => oldItems.filter(({ id }) => id !== item.id));
-    };
-  }, []);
+  // const removeItemMemoVersion = useMemo(() => {
+  //   return item => {
+  //     setItems(oldItems => oldItems.filter(({ id }) => id !== item.id));
+  //   };
+  // }, []);
 
   const removeItem = useCallback(item => {
     setItems(oldItems => oldItems.filter(({ id }) => id !== item.id));

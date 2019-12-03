@@ -1,9 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+function add(a, b) {
+  // code here
+}
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+it('0 + 0 == 0', () => {
+  expect(add(0, 0)).toEqual(0);
 });
